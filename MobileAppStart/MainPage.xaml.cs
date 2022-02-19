@@ -76,7 +76,7 @@ namespace MobileAppStart
         }
         private async void trafficbtn_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Traffic_light());
+            await Navigation.PushAsync(new  Svetofor());
         }
         private async void imgbtn_Clicked(object sender, EventArgs e)
         {
