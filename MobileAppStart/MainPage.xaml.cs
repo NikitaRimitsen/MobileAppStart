@@ -12,104 +12,48 @@ namespace MobileAppStart
     {
         public MainPage()
         {
-            //InitializeComponent();
-            StackLayout st = new StackLayout();
-            Button b = new Button() 
-            {
-                Text = "Open",
-                BackgroundColor = Color.SandyBrown
-            };
-            Button timer_b = new Button()
-            {
-                Text = "Time",
-                BackgroundColor = Color.SandyBrown
-            };
-            timer_b.Clicked += timer_b_Clicked;
-            Button box_b = new Button()
-            {
-                Text = "Clicker",
-                BackgroundColor = Color.SandyBrown
-            };
-            box_b.Clicked += box_b_Clicked;
-            Button box_date = new Button()
-            {
-                Text = "Date/Time",
-                BackgroundColor = Color.SandyBrown
-            };
-            box_date.Clicked += box_date_Clicked;
-            Button box_ss = new Button()
-            {
-                Text = "Stepper/slider",
-                BackgroundColor = Color.SandyBrown
-            };
-            box_ss.Clicked += box_ss_Clicked;
-            Button framebtn = new Button()
-            {
-                Text = "Frame",
-                BackgroundColor = Color.SandyBrown
-            };
-            framebtn.Clicked += framebtn_Clicked;
-            Button imgbtn = new Button()
-            {
-                Text = "Image",
-                BackgroundColor = Color.SandyBrown
-            };
-            imgbtn.Clicked += imgbtn_Clicked;
-            Button trafficbtn = new Button()
-            {
-                Text = "Traffic",
-                BackgroundColor = Color.SandyBrown
-            };
-            trafficbtn.Clicked += trafficbtn_Clicked;
-            //st = {b,timer}
-            st.Children.Add(b);
-            st.Children.Add(timer_b);
-            st.Children.Add(box_b);
-            st.Children.Add(box_date);
-            st.Children.Add(box_ss);
-            st.Children.Add(framebtn);
-            st.Children.Add(imgbtn);
-            st.Children.Add(trafficbtn);
-            st.BackgroundColor = Color.Cornsilk;
-            Content = st;
-            b.Clicked += B_Clicked;
+            profileImage.Source = ImageSource.FromFile("cat.jpg");
+            aboutList.ItemSource = GetMenuList();
+            var homePage = typeof(Views.AboutPage);
+            Detail = new NavigationPage((Page)Activator.CreateInstance(homePage));
+            IsPresented = false;
         }
-        private async void trafficbtn_Clicked(object sender, EventArgs e)
+        public List<MasterMenuItems> GetMenuList()
         {
-            await Navigation.PushAsync(new  Svetofor());
-        }
-        private async void imgbtn_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Image_page());
-        }
+            var list = new List<MasterMenuItems>();
+            list.Add(new MasterMenuItems()
+            {
+                TextAlignment = "Minust",
+                Detail = "Lühike info",
+                ImagePath = "cat.jpg",
+                TargetPage = typeof(View.AboutPage)
+            });
+            list.Add(new MasterMenuItems()
+            {
+                TextAlignment = "Minu kogemus",
+                Detail = "Natuke rohkem minu kogemisest",
+                ImagePath = "cat.jpg",
+                TargetPage = typeof(View.ExperiencePage)
+            });
+            list.Add(new MasterMenuItems()
+            {
+                TextAlignment = "Minu oskused",
+                Detail = "Natuke rohkem minu kogemisest",
+                ImagePath = "cat.jpg",
+                TargetPage = typeof(View.SkiilsPage)
+            });
+            list.Add(new MasterMenuItems()
+            {
+                TextAlignment = "Minu võidud",
+                Detail = "Ma olen uhke!!!",
+                ImagePath = "cat.jpg",
+                TargetPage = typeof(View.AchievemnetsPage)
+            });
+            return list;
 
-        private async void framebtn_Clicked(object sender, EventArgs e)
+            private void aboutList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            await Navigation.PushAsync(new FramePage());
-        } 
-        private async void box_ss_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new SliderPage());
-        }
 
-        private async void box_date_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Date());
-        }
-
-        private async void box_b_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Box_View_Page());
-        }
-
-        private async void timer_b_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Timer());
-        }
-
-        private async void B_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Entry_Page());
         }
     }
 }
