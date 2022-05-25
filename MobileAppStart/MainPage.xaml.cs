@@ -8,12 +8,12 @@ using Xamarin.Forms;
 
 namespace MobileAppStart
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : MasterDetailPage
     {
         public MainPage()
         {
             profileImage.Source = ImageSource.FromFile("cat.jpg");
-            aboutList.ItemSource = GetMenuList();
+            aboutList.ItemsSource = GetMenuList();
             var homePage = typeof(Views.AboutPage);
             Detail = new NavigationPage((Page)Activator.CreateInstance(homePage));
             IsPresented = false;
@@ -23,37 +23,40 @@ namespace MobileAppStart
             var list = new List<MasterMenuItems>();
             list.Add(new MasterMenuItems()
             {
-                TextAlignment = "Minust",
+                Text = "Minust",
                 Detail = "Lühike info",
                 ImagePath = "cat.jpg",
-                TargetPage = typeof(View.AboutPage)
+                TargetPage = typeof(Views.AboutPage)
             });
             list.Add(new MasterMenuItems()
             {
-                TextAlignment = "Minu kogemus",
+                Text = "Minu kogemus",
                 Detail = "Natuke rohkem minu kogemisest",
                 ImagePath = "cat.jpg",
-                TargetPage = typeof(View.ExperiencePage)
+                TargetPage = typeof(Views.ExperiencePage)
             });
             list.Add(new MasterMenuItems()
             {
-                TextAlignment = "Minu oskused",
+                Text = "Minu oskused",
                 Detail = "Natuke rohkem minu kogemisest",
                 ImagePath = "cat.jpg",
-                TargetPage = typeof(View.SkiilsPage)
+                TargetPage = typeof(Views.SkillsPage)
             });
             list.Add(new MasterMenuItems()
             {
-                TextAlignment = "Minu võidud",
+                Text = "Minu võidud",
                 Detail = "Ma olen uhke!!!",
                 ImagePath = "cat.jpg",
-                TargetPage = typeof(View.AchievemnetsPage)
+                TargetPage = typeof(Views.AchievemnetsPage)
             });
             return list;
-
-            private void aboutList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-
         }
+            private void aboutList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+            {
+            var selectedMenuItem = (MasterMenuItems)e.SelectedItem;
+            Type selectedPage = selectedMenuItem.TargetPage;
+            Detail = new NavigationPage((Page)Activator.CreateInstance(selectedPage));
+            IsPresented = false;
+            }
     }
 }
